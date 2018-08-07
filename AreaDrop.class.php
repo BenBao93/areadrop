@@ -33,13 +33,13 @@ class AreaDrop {
         $min_height = ($this->chart_size['height'] * ($this->chart_boundaries['low'] / 100));
         $avail_height = (($this->chart_size['height'] * ($this->chart_boundaries['high'] / 100)) - $min_height);
         $point_margin = [
-            'x' => ($this->chart_size['width'] / ($point_count - 1)),
-            'y' => ($avail_height / $variance),
+            'x' => floor($this->chart_size['width'] / ($point_count - 1)),
+            'y' => ceil($avail_height / $variance),
         ];
         $x_pointer = 0;
         $plots = [0, $this->chart_size['height']];
         foreach($values AS $value) {
-            $y_pointer = (($this->chart_size['height'] - $min_height) - (($value - $min_value) * $point_margin['y']));
+            $y_pointer = ceil(($this->chart_size['height'] - $min_height) - (($value - $min_value) * $point_margin['y']));
             $plots[] = $x_pointer;
             $plots[] = $y_pointer;
             
